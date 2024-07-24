@@ -4,7 +4,7 @@
 ## Part 1. Установка ОС
 **1. Установлен **Ubuntu 22.04 Server LTS** без графического интерфейса. (Использую программу для виртуализации - VirtualBox).Команда для просмотра`cat /etc/issue`**
 
-![linux_wer](skreenshots/Part1/1.png)
+![linux_wer](skreenshots/Part1/1.jpg)
 
 ## Part 2. Создание пользователя
 
