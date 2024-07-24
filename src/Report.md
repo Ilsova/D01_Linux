@@ -10,56 +10,56 @@
 
 **1. Создаю нового пользователя командой ``sudo adduser tmp_user``**
 
-![linux_wer](skreenshots/Part2/2_1.png)
+![linux_wer](skreenshots/Part2/2_1.jpg)
 
 **2. Просматриваю нового пользователя ``cat /etc/passwd``**
 
-![linux_wer](skreenshots/Part2/2_2.png)
+![linux_wer](skreenshots/Part2/2_2.jpg)
 
 ## Part 3. Настройка сети ОС
 
 **1. Задаю название машины вида user-1  с помощью команды `sudo hostnamectl set-hostname user-1` и проверяю, что название изменилось`hostnamectl`**
 
-![linux_wer](skreenshots/Part3/3_1.png)
+![linux_wer](skreenshots/Part3/3_1.jpg)
 
 **2. Устанавливаю временную зону командой  `sudo timedatectl set-timezone Europe/Moscow`** 
 
-![linux_wer](skreenshots/Part3/3_2.png)
+![linux_wer](skreenshots/Part3/3_2.jpg)
 
 **3.  Вывожу названия сетевых интерфейсов с помощью консольной команды `` ifconfig``**
 
-![check_ifconfig](skreenshots/Part3/3_3.png)
+![check_ifconfig](skreenshots/Part3/3_3.jpg)
 
 - lo (loopback device) – виртуальный интерфейс, присутствующий по умолчанию в любом Linux. Он используется для отладки сетевых программ и запуска серверных приложений на локальной машине.
 
 **4. Сбрасываю свой старый ip адрес командой `sudo dhclient -r enp0s3`**
 
-![reset ip](skreenshots/Part3/3_4.png)
+![reset ip](skreenshots/Part3/3_4.jpg)
 
 **5. И получаю новый командой `sudo dhclient -v enp0s3`**
 
-![getting new ip](skreenshots/Part3/3_5.png)
+![getting new ip](skreenshots/Part3/3_5.jpg)
 
 **6. Проверяю все это командой `ifconfig`**
 
-![checking ip](skreenshots/Part3/3_6.png)
+![checking ip](skreenshots/Part3/3_6.jpg)
 
 - Dynamic Host Configuration Protocol (DHCP) — автоматический предоставляет IP адреса и прочие настройки сети (маску сети, шлюз и т.п) компьютерам и различным устройствам в сети. Клиент настроенный на получение адреса по протоколу DHCP посылает запрос к серверу, и тот в свою очередь предоставляет свободный IP адрес клиенту во временное пользование.
 
 **7. Определяю и вывожу на экран внешний ip-адрес шлюза (ip) командой  `wget -O - -q icanhazip.com` либо curl ident.me (предварительно установивив  curl ) и внутренний IP-адрес шлюза, он же ip-адрес по умолчанию (gw) командой `route -n`**
 
-![ip_adresses](skreenshots/Part3/3_7.png)
+![ip_adresses](skreenshots/Part3/3_7.jpg)
 
 
 **8. Задаю статичные настройки ip, gw, dns, для этого открываю файл /00-installer-config.yaml для редактирования командой `sudo vim /etc/netplan/00-installer-config.yaml`, отключаю получение адресов от DHCP и присваиваю свой статический адрес**
 
 - файл 00-installer-config.yaml - было: 
 
-![yam_file](skreenshots/Part3/3_8.png)
+![yam_file](skreenshots/Part3/3_8.jpg)
 
 - файл 00-installer-config.yaml - стало: 
 
-![yam_file](skreenshots/Part3/3_9.png)
+![yam_file](skreenshots/Part3/3_9.jpg)
 
 **9. `sudo netplan apply` - для применения конфигураций**
 
@@ -67,25 +67,25 @@
 
 **11. `ifconfig` - проверяем получили ли мы статистические настройки**
 
-![check_static_adresses](skreenshots/Part3/3_12.png)
+![check_static_adresses](skreenshots/Part3/3_12.jpg)
 
 **12. `ping -c 10 ya.ru` - и убеждаемся что все работает и нет потери пакетов**
 
-![checking ping](skreenshots/Part3/3_13.png)
+![checking ping](skreenshots/Part3/3_13.jpg)
 
 ## Part 4. Обновление ОС
 
 **1. `sudo apt update` - обновляю Ubuntu**
 
-![updating ubuntu](skreenshots/Part3/4_1.png)
+![updating ubuntu](skreenshots/Part3/4_1.jpg)
 
 **2. `sudo apt dist-upgrade` - обновляю версию пакетов**
 
-![updating ubuntu](skreenshots/Part3/4_2.png)
+![updating ubuntu](skreenshots/Part3/4_2.jpg)
 
 **3. И `sudo apt update` проверю на обновление**
 
-![checking updates](skreenshots/Part3/4_3.png)
+![checking updates](skreenshots/Part3/4_3.jpg)
 
 
 ## Part 5. Использование команды **sudo**
@@ -96,7 +96,7 @@
 
 **3. `sudo vim /etc/sudoers.d/new` - открываю в вим и записываю такую строку `new ALL=(ALL:ALL) ALL`**
 
-![new ALL](skreenshots/Part5/5_3.png)
+![new ALL](skreenshots/Part5/5_3.jpg)
 
 **4. Потом перехожу в нового пользователя командой su new_user**
 
@@ -104,40 +104,40 @@
 
 **6. Перезапускаю виртуальную машину и вижу, что все изменилось как нам и надо было.**
 
- ![reboot system](skreenshots/Part5/5_7.png)
+ ![reboot system](skreenshots/Part5/5_7.jpg)
 
 
 ## Part 6. Установка и настройка службы времени
 
 **1. `sudo apt install -y ntp` - Устанавливаю NTP протокол для синхронизации времени**
 
-![installing ntp](skreenshots/Part6/6_1.png)
+![installing ntp](skreenshots/Part6/6_1.jpg)
 
 **2. `ntpq -p` - Проверяю, что `ntp` подключён к серверам времен**
 
-![connecting to time server](skreenshots/Part6/6_2.png)
+![connecting to time server](skreenshots/Part6/6_2.jpg)
 
 **5. `sudo systemctl stop ntp` - остановила нашу команду**
 
 **6. `sudo ntpd -gq` - и принудительно синхронизирую все это**
 
-![synchron ntp&d](skreenshots/Part6/6_4.png)
+![synchron ntp&d](skreenshots/Part6/6_4.jpg)
 
 **7. `sudo systemctl start ntp` - снова все запускаю**
 
-![restart and checking](skreenshots/Part6/6_5.png)
+![restart and checking](skreenshots/Part6/6_5.jpg)
 
 **8. `apt install systemd-timesyncd` - устанавливаю утилиту запуска синхронизации**
 
-![restart and checking](skreenshots/Part6/6_6.png)
+![restart and checking](skreenshots/Part6/6_6.jpg)
 
 **9. `timedatectl set-ntp true` - этой командой запускаю синхронизацию**
 
-![launch](skreenshots/Part6/6_7.png)
+![launch](skreenshots/Part6/6_7.jpg)
 
 **10. `timedatectl show` - и в конце проверяю, что все работает и синхронизируется**
 
-![show time](skreenshots/Part6/6_8.png)
+![show time](skreenshots/Part6/6_8.jpg)
 
 
 ## Part 7. Установка и использование текстовых редакторов 
@@ -146,23 +146,23 @@
 
 **1. `sudo vim test_vim.txt` - создаю `.txt` файл и открываю его для записи**
 
-![file creation](skreenshots/Part7/7_1.png)
+![file creation](skreenshots/Part7/7_1.jpg)
 
 **2. Нажимаю `i` чтобы войти в режим редактирования**
 
 **3. Пишу свой ник `Styxdune`**
 
-![write file](skreenshots/Part7/7_2.png)
+![write file](skreenshots/Part7/7_2.jpg)
 
 **4. Нажимаю `:wq` чтобы оно сохранилось и вышло. Затем проверяю сохранилась ли надпись с помощью команды `cat test_vim.txt`**
 
-![check file](skreenshots/Part7/7_3.png)
+![check file](skreenshots/Part7/7_3.jpg)
 
 **5. Снова открываю файл как в пункте 1 и вхожу в режим редактирования как в пункте 2**
 
 **6. Меняю `Styxdune` на `21 school 21`**
 
-![change file](skreenshots/Part7/7_4.png)
+![change file](skreenshots/Part7/7_4.jpg)
 
 **8. Нажимаю `escape`**
 
@@ -170,28 +170,28 @@
 
 **10. Проверяю командой `cat test_vim.txt` что изменения не были сохранены**
 
-![check file](skreenshots/Part7/7_6.png)
+![check file](skreenshots/Part7/7_6.jpg)
 
 **11. Для поиска и замены нам понадобится открыть файл**
 
 **12. Нажать `escape` и ввести `:s/искомое слово/слово на которую мы заменим/g` - этот флаг отвечает за то чтобы во всем текстовом файле искомое слово заменили. В моем файле я поменяла "dune" на  "rock".**
 
-![search in file](skreenshots/Part7/7_7.png)
+![search in file](skreenshots/Part7/7_7.jpg)
 
 **13. Сохраняем и выходим**
 
-![check file](skreenshots/Part7/7_8.png)
+![check file](skreenshots/Part7/7_8.jpg)
 
 
 ###JOE-------------------------------------------
 
 **1. `sudo apt install joe` - скачиваю `Joe` текстовый редактор.**
 
-![instaling Joe](skreenshots/Part7/7_9.png)
+![instaling Joe](skreenshots/Part7/7_9.jpg)
 
 **2. `sudo joe test_joe.txt` - создаю .txt файл и открываю его для записи**
 
-![ulling file](skreenshots/Part7/7_11.png)
+![ulling file](skreenshots/Part7/7_11.jpg)
 
 **Записала все что мне нужно**
 
@@ -201,15 +201,15 @@
 
 **Тут же проверяю сохранилась ли запись прочитав ее с помощью `cat`**
 
-![check file](skreenshots/Part7/7_12.png)
+![check file](skreenshots/Part7/7_12.jpg)
 
 **4. Снова открывю файл и меняю содержимое на `21 School 21`, но уже без сохраниния -  буква y**
 
-![change file without saving](skreenshots/Part7/7_13.png)
+![change file without saving](skreenshots/Part7/7_13.jpg)
 
 **Проверяю, что файл, остался без изменений**
 
-![checking file](skreenshots/Part7/7_14.png)
+![checking file](skreenshots/Part7/7_14.jpg)
 
 **5. Для поиска я нажимаю `control+k` и потом `f`**
 
@@ -217,17 +217,17 @@
 
 **7.Пишу слово на которое мы заменим, в моем случае это `Joe`**
 
-![last vers](skreenshots/Part7/7_15.png)
+![last vers](skreenshots/Part7/7_15.jpg)
 
 **8. Сохраняю и выхожу**
 
 **Проверяю, что текст изменился**
-![checking file](skreenshots/Part7/7_16.png)
+![checking file](skreenshots/Part7/7_16.jpg)
 
 ###NANO------------------------------------------------
 **1. `sudo nano test_nano.txt` - создаю `.txt` файл и открываю его для записи**
 
-![writing file](skreenshots/Part7/7_18.png)
+![writing file](skreenshots/Part7/7_18.jpg)
 
 **2. Записываю. Нажимаю команду `control+x`**
 
@@ -237,17 +237,17 @@
 
 **Проверяю сохранилась ли запись**
 
-![checking file](skreenshots/Part7/7_19.png)
+![checking file](skreenshots/Part7/7_19.jpg)
 
 **4.Снова открываю файл и переписываю его на 21 Shooll 21**
 
-![change file](skreenshots/Part7/7_20.png)
+![change file](skreenshots/Part7/7_20.jpg)
 
 **затем нажимаю кнопку `n` и `enter` чтобы сохранение не произошло**
 
 **Сразу проверяю содержимое файла**
 
-![checking file](skreenshots/Part7/7_21.png)
+![checking file](skreenshots/Part7/7_21.jpg)
 
 **5. Для того чтобы он произвел поиск и замену текста я нажимаю `control+\`**
 
@@ -255,51 +255,51 @@
 
 **7. И нажимаю `enter`**
 
-![swap text in file](skreenshots/Part7/7_22.png)
+![swap text in file](skreenshots/Part7/7_22.jpg)
 
 **8. У нас появилось еще одно меню. В этот раз в то же место мы записываем слово, на которое хотим поменять, в моем случае это `Nano`**
 
-![swap text in file](skreenshots/Part7/7_23.png)
+![swap text in file](skreenshots/Part7/7_23.jpg)
 
 **9. Спрашивает заменить? Мы говорим да и жмем кнопку `y`**
 
 **10. Сохраняем и выходим, как в пунктах выше**
 **И смотрим наш конечный файл**
 
-![checking file](skreenshots/Part7/7_24.png)
+![checking file](skreenshots/Part7/7_24.jpg)
 
 
 ## Part 8. Установка и базовая настройка сервиса **SSHD**
 
 **1. Устананавливаю службу SSHd с помощью команды: `sudo apt-get install openssh-server`**
 
-![install openssh-server](skreenshots/Part8/8_1.png)
+![install openssh-server](skreenshots/Part8/8_1.jpg)
 
 **2. Добавляю автостарт службы при загрузке системы.**
 
 **Для включения автостарта службы воспользуемся командой: `sudo systemctl enable ssh`**
 
-![active autostart](skreenshots/Part8/8_2.png)
+![active autostart](skreenshots/Part8/8_2.jpg)
 
 **3.Перенастраиваю службу SSHd на порт 2022.**
 **Для этого открываю файл конфигурации с помощью команды: `vim /etc/ssh/sshd_config`**
 **Нашел строку, определяющую порт: Port 22, поменял его на 2022 и раскомментировал строку.**
 
-![Port 22->2022](skreenshots/Part8/8_4.png)
+![Port 22->2022](skreenshots/Part8/8_4.jpg)
 
 > ps (от англ. process status) — программа в Unix-подобных операционных системах, выводящая отчёт о работающих процессах. Ключ -А (-е) позволяет вывести все процессы.
 
 **4. Сохранила и перезапустила командой `sudo service sshd restart` и проверю командой `sudo service sshd status`**
 
-![restart system](skreenshots/Part8/8_5.png)
+![restart system](skreenshots/Part8/8_5.jpg)
 
 **5.Проверяю статус фаервола командой `sudo ufw status` он был  отключен ( по умолчанию) `inactive`, я исправила это командой `sudo ufw enable`**
 
-![checking firewall](skreenshots/Part8/8_6.png)
+![checking firewall](skreenshots/Part8/8_6.jpg)
 
 **6. Открываю порт командой `sudo ufw allow 2022` и еще раз проверяю статус**
 
-![checking status](skreenshots/Part8/8_7.png)
+![checking status](skreenshots/Part8/8_7.jpg)
 
 **9. Перезапускаю систему командой  `sudo reboot`**
 
@@ -307,7 +307,7 @@
 
 **11. Вывод команды  `netstat -tan`**
 
-![netstan -tan](skreenshots/Part8/8_9.png)
+![netstan -tan](skreenshots/Part8/8_9.jpg)
 
 >netstat (network statistics) — утилита командной строки, выводящая на дисплей состояние TCP-соединений (как входящих, так и исходящих), таблицы маршрутизации, число сетевых интерфейсов и сетевую статистику по протоколам. Основное назначение утилиты — поиск сетевых проблем и определение производительности сети.
 
@@ -331,7 +331,7 @@
 
 **2. Запускаю `top`.**
 
-![top](skreenshots/Part9/9_2.png)
+![top](skreenshots/Part9/9_2.jpg)
 
 * uptime - 5 min
 * количество авторизованных пользователей - 1
@@ -345,29 +345,29 @@
 **2. Cортировка по `PID`**
 **Для сортировки по нужному параметру нажимаю `shift + F`, стрелочками перемещаюсь к нужному параметру и нажимаю `S` и `Q`.**
 
-![top](skreenshots/Part9/9_3.png)
+![top](skreenshots/Part9/9_3.jpg)
 
 **3. отсортировка по `PERCENT_CPU`**
-![cpu%](skreenshots/Part9/9_4.png)
+![cpu%](skreenshots/Part9/9_4.jpg)
 
 **4. отсортировка по `PERCENT_MEM`**
-![mem](skreenshots/Part9/9_5.png)
+![mem](skreenshots/Part9/9_5.jpg)
 
 **5. отсортировка по `TIME`**
-![time](skreenshots/Part9/9_6.png)
+![time](skreenshots/Part9/9_6.jpg)
 
 **Для фильтрации по нужному параметру нажимаю `O`, пишу команду `command=sshd` и нажимаю ENTER. Анологично фильтрую и по другим процессам.**
 
-![sshd](skreenshots/Part9/9_7.png)
+![sshd](skreenshots/Part9/9_7.jpg)
 
 **6. отфлиртованный процесс `sshd`**
-![filtr_sshd](skreenshots/Part9/9_8.png)
+![filtr_sshd](skreenshots/Part9/9_8.jpg)
 
 **7. `syslog`**
-![syslog](skreenshots/Part9/9_10.png)
+![syslog](skreenshots/Part9/9_10.jpg)
 
 **8. с добавлением `hostname, clocl, uptime`**
-![time](skreenshots/Part9/9_11.png)
+![time](skreenshots/Part9/9_11.jpg)
  
 
 ## Part 10. Использование утилиты **fdisk**
@@ -376,21 +376,21 @@
 
 **`/dev/sda 10.53GIB, 11296309248 bytes, 22063104 sector`**
 
-![fdisk](skreenshots/Part10/10_1.png)
+![fdisk](skreenshots/Part10/10_1.jpg)
 
 * Имя /dev/sda
 * Размер 30 Гб
 * Колличество секторов 62914560
 * Размер swap 2.7 Gb 
 > Узнать размер swap можно с помощью команды `free -h`
-![fdisk](skreenshots/Part10/10_3.png)
+![fdisk](skreenshots/Part10/10_3.jpg)
 
 
 ## Part 11. Использование утилиты **df** 
 
 **1. Для корневого раздела запускаю команду `df /`**
 
-![df](skreenshots/Part11/11_1.png)
+![df](skreenshots/Part11/11_1.jpg)
 
 * размер раздела - 14339080
 * размер занятого пространства - 7121844
@@ -400,7 +400,7 @@
 
 **2. Для корневого раздела с командой `df -Th /`**
 
-![df -Th](skreenshots/Part11/11_2.png)
+![df -Th](skreenshots/Part11/11_2.jpg)
 
 * размер раздела - 14G
 * размер занятого пространства - 6,8G
@@ -413,53 +413,53 @@
 
 **1. Вывожу в байтах без без символьных ссылок командой `du -B1 -d0 /home /var /var/log`**
 
-![/home /var /var/log](skreenshots/Part12/12_1.png)
+![/home /var /var/log](skreenshots/Part12/12_1.jpg)
 
 **Вывожу в человеческом виде без без символьных ссылок командой `du -h -d0 /home /var /var/log`**
 
-![/home /var /var/log](skreenshots/Part12/12_2.png)
+![/home /var /var/log](skreenshots/Part12/12_2.jpg)
 
 **2. Вывожу размер всего содержимого в /var/log.**
 
-![/var/log](skreenshots/Part12/12_3.png)
+![/var/log](skreenshots/Part12/12_3.jpg)
 
 
 ## Part 13. Установка и использование утилиты **ncdu**
 
 **1. Устанавливаю  командой `sudo apt install ncdu`**
-![install ncdu](skreenshots/Part13/13_1.png)
+![install ncdu](skreenshots/Part13/13_1.jpg)
 
 **2. `/home`**
-![home](skreenshots/Part13/13_2.png)
+![home](skreenshots/Part13/13_2.jpg)
 
 **3. `/var`**
-![var](skreenshots/Part13/13_4.png)
+![var](skreenshots/Part13/13_4.jpg)
 
 **4. `/var/log`**
-![var/log](skreenshots/Part13/13_5.png)
+![var/log](skreenshots/Part13/13_5.jpg)
 
 
 ## Part 14. Работа с системными журналами
 
 **`/var/log/dmesg` содержит информацию о драйверах устройств**
 
-![/](skreenshots/Part14/14_2.png)
+![/](skreenshots/Part14/14_2.jpg)
 
 **`/var/log/auth.log` информация об авторизации пользователей, включая удачные и неудачные попытки входа в систему, а также задействованные механизмы аутентификации.**
 
-![auth](skreenshots/Part14/14_4.png)
+![auth](skreenshots/Part14/14_4.jpg)
 
 **`/var/log/syslog` содержит глобальный системный журнал, в котором пишутся сообщения от ядра Linux, различных служб, сетевых интерфейсов и т.д. с момента запуска системы.**
 
-![syslog](skreenshots/Part14/14_6.png)
+![syslog](skreenshots/Part14/14_6.jpg)
 
 **Информация о последней успешной авторизации: `sudo cat /var/log/auth.log | grep login`**
 
-![login](skreenshots/Part14/14_8.png)
+![login](skreenshots/Part14/14_8.jpg)
 
 **Перезапустила SSHd службу `sudo systemctl restart ssh` и нашла логи в `/var/log/syslog`**
 
-[sshd](skreenshots/Part14/14_10.png)
+[sshd](skreenshots/Part14/14_10.jpg)
 
 
 ## Part 15. Использование планировщика заданий **CRON**
@@ -468,12 +468,12 @@
 
 **2. Для создания задачи я открыла файл планировщик командой `crontab -e` и вписала следующую строку */2 * * * * uptime. Далее `crontab -l` позволяет посмотреть этот файл**
 
-![crontab](skreenshots/Part15/15_3.png)
+![crontab](skreenshots/Part15/15_3.jpg)
 
 **2. Записи в /var/log/syslog:**
-![logcron](skreenshots/Part15/15_5.png)
+![logcron](skreenshots/Part15/15_5.jpg)
 
 **3. Удаляю конфигурационный файл: `crontab -r`  и пытаюсь вывести список задач после удаления**
-![delcron](skreenshots/Part15/15_6.png)
+![delcron](skreenshots/Part15/15_6.jpg)
 
 **Для меня нет списка задач, все отработало корректно.**
